@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labelapp2.AnnotController">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Data loading">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Image view">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="550.0" fitWidth="1000.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="NextButton" layoutX="896.0" layoutY="705.0" mnemonicParsing="false" onAction="#NextImage" prefHeight="26.0" prefWidth="96.0" text="Next" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="8.0" />
+                        <Button fx:id="PrevButton" layoutX="896.0" layoutY="713.0" mnemonicParsing="false" onAction="#PrevImage" prefHeight="25.0" prefWidth="298.0" text="Prev" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="6.0" />
+                        <Label fx:id="imageFileName" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="617.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <Button fx:id="JSONOpenerBtn" layoutX="678.0" layoutY="14.0" mnemonicParsing="false" onAction="#JSONOpen" prefHeight="25.0" prefWidth="92.0" text="Read JSON" />
+                        <Button fx:id="ImageOpenerBtn" layoutX="788.0" layoutY="14.0" mnemonicParsing="false" onAction="#FolderOpener" prefHeight="25.0" prefWidth="92.0" text="Images" />
+                        <Button fx:id="imageShowerBtn" disable="true" layoutX="896.0" layoutY="14.0" mnemonicParsing="false" onAction="#StartImage" prefHeight="25.0" prefWidth="93.0" text="Show images" />
+                        <Pane fx:id="RectanglePane" layoutY="40.0" prefHeight="550.0" prefWidth="1067.0" style="-fx-border-color: black;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="142.0585375" rotate="175.10759053" stroke="BLACK" strokeType="INSIDE" width="97.7213875" x="96.88930625" y="355.9082312" />
+                           </children></Pane>
+                        <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#GenerateRectangles" prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
+                        <Button fx:id="AnnotationClearBtn" layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveRectangles" prefHeight="25.0" prefWidth="124.0" text="Clear annotations" />
+                        <Label fx:id="w1" layoutX="29.0" layoutY="612.0" text="Label" />
+                        <Label fx:id="w2" layoutX="29.0" layoutY="640.0" text="Label" />
+                        <Label fx:id="h1" layoutX="29.0" layoutY="668.0" text="Label" />
+                        <Label fx:id="h2" layoutX="29.0" layoutY="697.0" text="Label" />
+                         <Label fx:id="w3" layoutX="29.0" layoutY="726.0" text="Label" />
+                         <Label fx:id="h3" layoutX="29.0" layoutY="752.0" text="Label" />
+
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
