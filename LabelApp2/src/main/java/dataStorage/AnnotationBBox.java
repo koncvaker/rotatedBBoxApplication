@@ -26,22 +26,16 @@ public class AnnotationBBox {
         width   = values.get(2);
         height  = values.get(3);
         theta   = values.get(4);
-        // TODO: 2021. 09. 28. Normalize bbox between -45˙ and 45˙  
-        if(theta < Math.PI/4){
 
-        }
-        else if(theta > Math.PI/4){
-            
-        }
     }
 
-    public Rectangle toRectangle(){
+    public Rectangle toRectangle(double ratio){
         Rectangle retval = new Rectangle();
-        retval.setX(x);
-        retval.setY(y);
-        retval.setWidth(width);
-        retval.setHeight(height);
-
+        retval.setX(x*ratio);
+        retval.setY(y*ratio);
+        retval.setWidth(width*ratio);
+        retval.setHeight(height*ratio);
+        retval.rotateProperty().set(Math.toDegrees(theta));
         return retval;
     }
 

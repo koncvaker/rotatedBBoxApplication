@@ -32,6 +32,7 @@ public class DataWorker {
     private IdentityGenerator     idGenerator  = new IdentityGenerator();
     private String                writePath;
     private String                fileName;
+    private String                readPath;
 
     //Constructor stuff
     public DataWorker(String path, String name){
@@ -110,6 +111,7 @@ public class DataWorker {
     public void setWritePath(String writePath){
         this.writePath = writePath;
     }
+    public void setReadPath(String readPath) { this.readPath = readPath;    }
 
     //Get stuff
     public int getImageID(String fileName){
@@ -178,8 +180,8 @@ public class DataWorker {
     void readXML(String fname) {
 
         try {
-            // TODO: 2021. 09. 27. Set pathname to a real one!
-            File inputFile = new File("C:\\Users\\Koni\\Desktop\\Programming\\XMLS\\" + fname);
+            // TODO: 2021. 09. 27. Set pathname to a real one when you call the function
+            File inputFile = new File(readPath + fname);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -223,9 +225,24 @@ public class DataWorker {
                     bboxX = bboxX - bboxWidth / 2;
                     bboxY = bboxY - bboxHeight / 2;
                     bboxAngle = Double.parseDouble(eElement.getElementsByTagName("angle").item(0).getTextContent());
-                    //Normalize angle between -pi/4 and pi/4
-                    // TODO: 2021. 09. 30. When displayed it rotation has to be inverted, because we need to measure anti clockwise for training, and
-                    //if(bboxAngle <)
+                    //Normalize angle between -pi/4 and pi/4 (-45° | +45°)
+                    // TODO: 2021. 09. 30. When displayed it rotation has to be inverted, because we need to measure anti clockwise for training, and clockwise for displaying
+                    double tempBBoxAngle = Math.toDegrees(bboxAngle);
+                    while (tempBBoxAngle < -45){
+                        tempBBoxAngle += 90;
+                        double tempwidth;
+                        tempwidth = bboxWidth;
+                        bboxWidth = bboxHeight;
+                        bboxHeight = tempwidth;
+                    }
+                    while (tempBBoxAngle > 45){
+                        tempBBoxAngle -= 90;
+                        double tempWidth;
+                        tempWidth = bboxWidth;
+                        bboxWidth = bboxHeight;
+                        bboxHeight = tempWidth;
+                    }
+                    bboxAngle = Math.toRadians(tempBBoxAngle);
 
 
                     bbox = new AnnotationBBox(bboxX,bboxY,bboxWidth,bboxHeight,bboxAngle);
@@ -364,6 +381,8 @@ public class DataWorker {
     public void resetIdentityGenerator(){
         idGenerator = new IdentityGenerator();
     }
+
+
 
 
 }
