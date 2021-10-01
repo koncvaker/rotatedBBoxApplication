@@ -4,6 +4,7 @@ import dataStorage.DataWorker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,33 +22,37 @@ import java.io.FileNotFoundException;
 import java.util.Vector;
 
 public class AnnotController {
+    public Button setXMLReadPathBtn;
+    public Button setPhotoReadPathBtn;
+    public Button setJSONReadPathBtn;
+    public Button setJSONWritePathBtn;
+    public Button setJSONFileNameBtn;
+
+    public Label photoReadPathLabel;
+    public Label jsonReadPathLabel;
+    public Label jsonWritePathLabel;
+    public Label jsonFileNameLabel;
+    public Label xmlReadPathLabel;
+    public TextField jsonFilenameTextField;
+
     @FXML
     private Label imageFileName;
     @FXML
     private ImageView imageView;
-
     @FXML
     private Button JSONOpenerBtn;
-
     @FXML
     private Button imageShowerBtn;
-
-
     @FXML
     private AnchorPane AnchorPane;
-
     @FXML
     private Button ImageOpenerBtn;
-
     @FXML
     private Button AnnotationShowBtn;
-
     @FXML
     private Button AnnotationClearBtn;
-
     @FXML
     private Pane RectanglePane;
-
     @FXML
     private Label w1;
     @FXML
@@ -62,15 +67,59 @@ public class AnnotController {
     private Label h3;
 
 
+
     private String readXMLPath;
     private String writeJSONPath;
     private String readImgFolderPath;
     private String readJSONPath;
+    private String writeJSONFileName;
     private int imgId;
     private String[] readImages;
     private final DataWorker dataStorage = new DataWorker();
     public double imgWidth;
     public double imgHeight;
+
+
+    @FXML
+    protected void getXMLReadPath(){
+        Stage stage = (Stage) AnchorPane.getScene().getWindow();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(stage);
+        readXMLPath = file.getPath();
+        xmlReadPathLabel.setText(readXMLPath);
+    }
+    @FXML
+    protected void getPhotoReadPath(){
+        Stage stage = (Stage) AnchorPane.getScene().getWindow();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(stage);
+        readImgFolderPath = file.getPath();
+        photoReadPathLabel.setText(readImgFolderPath);
+    }
+    @FXML
+    protected void getJSONReadPath(){
+        Stage stage = (Stage) AnchorPane.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showOpenDialog(stage);
+        readJSONPath = file.getPath();
+        jsonReadPathLabel.setText(readJSONPath);
+    }
+    @FXML
+    protected void getJSONWritePath(){
+        Stage stage = (Stage) AnchorPane.getScene().getWindow();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(stage);
+        writeJSONPath = file.getPath();
+        jsonWritePathLabel.setText(writeJSONPath);
+    }
+    @FXML
+    protected void getJSONFilenamePath(){
+
+        writeJSONFileName = jsonFilenameTextField.getText();
+        jsonFileNameLabel.setText(writeJSONFileName);
+    }
 
 
     @FXML

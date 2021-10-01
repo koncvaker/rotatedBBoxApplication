@@ -13,7 +13,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="setXMLReadPathBtn" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" text="Set XML read path" />
+                        <Button fx:id="setXMLReadPathBtn" layoutY="1.0" mnemonicParsing="false" onAction="#getXMLReadPath" prefHeight="26.0" prefWidth="124.0" text="Set XML read path" />
                         <Label layoutX="145.0" layoutY="5.0" prefHeight="18.0" prefWidth="94.0" text="XML read path:" />
                         <Button fx:id="setPhotoReadPathBtn" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" text="Set photo read path" />
                         <Label layoutX="145.0" layoutY="31.0" prefHeight="18.0" prefWidth="94.0" text="Photo read path:" />
@@ -25,9 +25,10 @@
                         <Label layoutX="143.0" layoutY="109.0" prefHeight="18.0" prefWidth="97.0" text="JSON file name:" />
                         <Label layoutX="268.0" layoutY="6.0" prefHeight="2.0" prefWidth="510.0" fx:id="xmlReadPathLabel" />
                         <Label fx:id="photoReadPathLabel" layoutX="268.0" layoutY="31.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label layoutX="268.0" layoutY="57.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label layoutX="268.0" layoutY="83.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label layoutX="268.0" layoutY="109.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonReadPathLabel" layoutX="268.0" layoutY="57.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonWritePathLabel" layoutX="268.0" layoutY="83.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonFileNameLabel" layoutX="268.0" layoutY="109.0" prefHeight="2.0" prefWidth="510.0" />
+                        <TextField fx:id="jsonFilenameTextField" layoutX="145.0" layoutY="140.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
