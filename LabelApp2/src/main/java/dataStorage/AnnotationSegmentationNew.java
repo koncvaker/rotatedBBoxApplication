@@ -11,7 +11,8 @@ public class AnnotationSegmentationNew {
         this.segmentation = segmentation;
     }
     public AnnotationSegmentationNew(double x, double y, double w, double h, double theta){
-        Vector<Double> doubleVector = new Vector<Double>();
+
+        segmentation = new Vector<Vector<Double>>();
         double degree = Math.toDegrees(theta);
         double x1 = x;
         double y1 = y;
@@ -19,54 +20,47 @@ public class AnnotationSegmentationNew {
         double tempX;
         double tempY;
 
-        //Top right
-        tempX = x + w;
-        tempY = y;
+        //Top left
+        tempX = x;
+        tempY = y + h;
         double x2 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
         double y2 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
-        //Bottom right
+        //Top right
         tempX = x + w;
-        tempY = y - h;
+        tempY = y + h;
         double x3 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
         double y3 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
-        //Bottom left
-        tempX = x;
-        tempY = y - h;
+        //Bottom right
+        tempX = x + w;
+        tempY = y;
         double x4 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
         double y4 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
 
+        Vector<Double> doubleVector = new Vector<Double>();
         doubleVector.add(x1);
         doubleVector.add(y1);
+        segmentation.add(doubleVector);
+        doubleVector = new Vector<Double>();
         doubleVector.add(x2);
         doubleVector.add(y2);
+        segmentation.add(doubleVector);
+        doubleVector = new Vector<Double>();
         doubleVector.add(x3);
         doubleVector.add(y3);
+        segmentation.add(doubleVector);
+        doubleVector = new Vector<Double>();
         doubleVector.add(x4);
         doubleVector.add(y4);
-
+        segmentation.add(doubleVector);
     }
 
 
     public void print(){
-        int vectorCounter = 0;
+        int vectorCounter = 1;
         for(Vector<Double> i : segmentation){
-            int xCounter = 1;
-            int yCounter = 1;
-            boolean even = false;
-            System.out.println("The " + vectorCounter + ". segmentation: ");
-            for(double j : i){
-                if(even){
-                    System.out.println("y" + yCounter + ": " + j);
-                    yCounter++;
-                    even = false;
-                }
-                else {
-                    System.out.println("x" + xCounter + ": " + j);
-                    xCounter++;
-                    even = true;
-                }
-
-            }
+            System.out.println("y" + vectorCounter + ": " + i.get(0));
+            System.out.println("x" + vectorCounter + ": " + i.get(1));
+            vectorCounter++;
         }
     }
 

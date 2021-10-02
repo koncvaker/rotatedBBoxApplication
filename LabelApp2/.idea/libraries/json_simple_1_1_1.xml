@@ -2,6 +2,7 @@
   <library name="json-simple-1.1.1">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../SimpleJSON/json-simple-1.1.1.jar!/" />
+      <root url="jar://G:/Downloads/json-simple-1.1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -26,114 +26,63 @@ public class DataWorker {
 
     //Variable declaration stuff
     public JSONData storage;
-    public  final Vector<Image>          images;
-    private final Vector<AnnotationCore>    annotations;
-    private final Vector<Category>      categories;
     private IdentityGenerator     idGenerator  = new IdentityGenerator();
-    private String                writePath;
-    private String                fileName;
-    private String                readPath;
+    private String  XMLReadPath;
+    private String  JSONFileName;
+    private String  JSONReadPath;
+    private String  JSONWritePath;
+
 
     //Constructor stuff
-    public DataWorker(String path, String name){
-        images      = new Vector<Image>();
-        annotations = new Vector<AnnotationCore>();
-        categories  = new Vector<Category>();
-        writePath   = path;
-        fileName    = name;
-    }
     public DataWorker(){
         storage = new JSONData();
-        images      = new Vector<Image>();
-        annotations = new Vector<AnnotationCore>();
-        categories  = new Vector<Category>();
-        writePath   = "";
-        fileName    = "";
     }
 
     //Add stuff
-    public int addImage(String file_name,int width,int height){
-        boolean inImages = false;
-        if(images.size() != 0){
-            for (Image test:images) {
-                if(test.nameEquals(file_name)){
-                    inImages = true;
-                    break;
-                }
-            }
+    public void addImage(String file_name,int width,int height){
+        if(storage.getImageIDByFilename(file_name) == -1){
+            storage.addImage(new Image(idGenerator.getImg_id(),file_name,width,height));
         }
-        if(!inImages){
-            images.add(new Image(idGenerator.getImg_id(),file_name,width,height));
-        }
-        return 0;
     }
-    public void addAnnotation(int img_id, int cat_id, double area, int iscrowd, AnnotationBBox box, AnnotationSegmentation seg){
+    public void addAnnotation(int img_id, int cat_id, double area, int iscrowd, AnnotationBBox box, AnnotationSegmentationNew seg){
         // TODO: 2021. 09. 28. Repair segmentation
-        //annotations.add(new AnnotationCore(idGenerator.getAnn_id(),img_id,cat_id,area,iscrowd,box,seg));
+        storage.addAnnotation(new AnnotationCore(idGenerator.getAnn_id(),img_id,cat_id,area,iscrowd,box,seg));
+
     }
     public void addCategory(String category){
-        boolean inCategories = false;
-        if(categories.size() != 0){
-            for (Category test:categories) {
-                if(test.name.equals(category)){
-                    inCategories = true;
-                    break;
-                }
-            }
-        }
-        if(!inCategories){
-            categories.add(new Category(idGenerator.getCat_id(),category));
+        if(storage.getCategoryIDByName(category) == -1){
+            storage.addCategory(new Category(idGenerator.getCat_id(),category));
         }
     }
-    public void addImage(Image img){storage.addImage(img);}
+
 
     //Print stuff
     public void printImages(){
-        for (Image i: images) {
-            i.print();
-        }
+        storage.printImages();
     }
     public void printAnnotations(){
-        for (AnnotationCore i: annotations) {
-            i.print();
-        }
+        storage.printAnnotations();
     }
     public void printCategories(){
-        for( Category i : categories){
-            i.print();
-        }
+        storage.printCategories();
+    }
+    public void printAll(){
+        storage.printAll();
     }
 
     //Set stuff
-    public void setFileName(String fileName){
-        this.fileName = fileName;
-    }
-    public void setWritePath(String writePath){
-        this.writePath = writePath;
-    }
-    public void setReadPath(String readPath) { this.readPath = readPath;    }
+    public void setJSONFileName(String fileName)    {this.JSONFileName  = fileName;}
+    public void setJSONWritePath(String writePath)  {this.JSONWritePath = writePath;}
+    public void setXMLReadPath(String XMLReadPath)  { this.XMLReadPath  = XMLReadPath;}
+    public void setJSONReadPath(String jsonReadPath){ this.JSONReadPath = jsonReadPath;}
 
-    //Get stuff
-    public int getImageID(String fileName){
-        for (Image i: images) {
-            if(i.nameEquals(fileName)){
-                return i.id;
-            }
-        }
-        return -1;
-    }
-    public int getCategoryID(String category){
-        for (Category i: categories) {
-            if(i.name.equals(category)){
-                return i.id;
-            }
-        }
-        return -1;
-    }
+
 
     //Read stuff from files
-    public void readJSON(String path){
+    public void readJSON(){
+        String path = JSONReadPath;
         resetStorage();
+        resetIdentityGenerator();
         JSONParser jsonParser = new JSONParser();
         try
         {
@@ -160,15 +109,18 @@ public class DataWorker {
             e.printStackTrace();
         }
     }
-    public void readAllXML(String path){
-
-        String[] pathnames;
+    public void readAllXML(){
+        resetStorage();
+        resetIdentityGenerator();
+        String path = XMLReadPath;
+        String[] pathNames;
         File f = new File(path);
-        pathnames = f.list();
+        pathNames = f.list();
 
         // For each pathname in the pathnames array
-        for (String pathname : pathnames) {
+        for (String pathname : pathNames) {
             // Print the names of files and directories
+            System.out.println("Reading: " + pathname);
             if (pathname.endsWith(".xml")) {
                 //System.out.println(pathname);
                 readXML(pathname);
@@ -178,10 +130,8 @@ public class DataWorker {
 
     }
     void readXML(String fname) {
-
         try {
-            // TODO: 2021. 09. 27. Set pathname to a real one when you call the function
-            File inputFile = new File(readPath + fname);
+            File inputFile = new File(XMLReadPath + '\\' + fname);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -205,8 +155,8 @@ public class DataWorker {
             int imageID;
             int catID;
             AnnotationBBox bbox;
-            AnnotationSegmentation seg;
-            imageID = getImageID(fileName);
+            AnnotationSegmentationNew seg;
+            imageID = storage.getImageIDByFilename(fileName);
 
             NodeList nList = doc.getElementsByTagName("object");
             for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -215,7 +165,7 @@ public class DataWorker {
                     Element eElement = (Element) nNode;
                     category = eElement.getElementsByTagName("name").item(0).getTextContent();
                     addCategory(category);
-                    catID = getCategoryID(category);
+                    catID = storage.getCategoryIDByName(category);
                     bboxX = Double.parseDouble(eElement.getElementsByTagName("cx").item(0).getTextContent());
                     bboxY = Double.parseDouble(eElement.getElementsByTagName("cy").item(0).getTextContent());
                     bboxWidth = Double.parseDouble(eElement.getElementsByTagName("w").item(0).getTextContent());
@@ -242,11 +192,11 @@ public class DataWorker {
                         bboxWidth = bboxHeight;
                         bboxHeight = tempWidth;
                     }
-                    bboxAngle = Math.toRadians(tempBBoxAngle);
-
+                    //We have to measure anti-clockwise for training!
+                    bboxAngle = -1 * Math.toRadians(tempBBoxAngle);
 
                     bbox = new AnnotationBBox(bboxX,bboxY,bboxWidth,bboxHeight,bboxAngle);
-                    seg = new AnnotationSegmentation(bboxX,bboxY,bboxWidth,bboxHeight,bboxAngle);
+                    seg = new AnnotationSegmentationNew(bboxX,bboxY,bboxWidth,bboxHeight,bboxAngle);
                     addAnnotation(imageID,catID,bboxWidth*bboxHeight,0,bbox,seg);
                 }
             }
@@ -298,80 +248,18 @@ public class DataWorker {
 
     //Write stuff to files
     public void writeDataToJSON(){
-
-        JSONObject obj = new JSONObject();
-
-        JSONArray imagesArray = new JSONArray();
-        for (Image i: images) {
-            JSONObject image = new JSONObject();
-            image.put("id",i.id);
-
-            Path path = Paths.get(i.fileName);
-            Path fileName = path.getFileName();
-            image.put("file_name",fileName.toString());
-            image.put("width",i.width);
-            image.put("height",i.height);
-            imagesArray.add(image);
-        }
-        obj.put("images",imagesArray);
-
-        JSONArray annotArray = new JSONArray();
-        for (AnnotationCore i : annotations) {
-            JSONObject annotation = new JSONObject();
-            annotation.put("id",i.annotID);
-            annotation.put("image_id",i.imgID);
-            annotation.put("category_id",i.catID);
-            JSONArray bboxArray = new JSONArray();
-            bboxArray.add(i.box.x);
-            bboxArray.add(i.box.y);
-            bboxArray.add(i.box.width);
-            bboxArray.add(i.box.height);
-            bboxArray.add(i.box.theta);
-            annotation.put("bbox",bboxArray);
-
-            JSONArray segmentArrayContainer = new JSONArray();
-            JSONArray segmentArray = new JSONArray();
-            // TODO: 2021. 09. 28. Repair annotations
-            /*
-            segmentArray.add(i.segment.x1);
-            segmentArray.add(i.segment.y1);
-            segmentArray.add(i.segment.x2);
-            segmentArray.add(i.segment.y2);
-            segmentArray.add(i.segment.x3);
-            segmentArray.add(i.segment.y3);
-            segmentArray.add(i.segment.x4);
-            segmentArray.add(i.segment.y4);*/
-
-            segmentArrayContainer.add(segmentArray);
-            annotation.put("segmentation",segmentArrayContainer);
-            annotation.put("area",i.area);
-            annotation.put("iscrowd",i.isCrowd);
-            annotArray.add(annotation);
-        }
-        obj.put("annotations",annotArray);
-
-        JSONArray categoriesArray = new JSONArray();
-        for(Category i : categories){
-            JSONObject category = new JSONObject();
-            category.put("id",i.id);
-            category.put("name",i.name);
-            categoriesArray.add(category);
-        }
-        obj.put("categories",categoriesArray);
+        JSONObject obj = storage.getJSONObject();
         FileWriter file;
         try {
-
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter(writePath+fileName);
+            file = new FileWriter(JSONWritePath + '\\' + JSONFileName);
             file.write(obj.toJSONString());
             file.flush();
             file.close();
-
         } catch (IOException e) {
             e.printStackTrace();
 
         }
-
     }
 
     //Reset stuff

@@ -1,6 +1,7 @@
 package dataStorage;
 
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Vector;
@@ -26,16 +27,19 @@ public class AnnotationBBox {
         width   = values.get(2);
         height  = values.get(3);
         theta   = values.get(4);
-
     }
 
     public Rectangle toRectangle(double ratio){
         Rectangle retval = new Rectangle();
-        retval.setX(x*ratio);
-        retval.setY(y*ratio);
+        retval.setY((y+height)*ratio);
         retval.setWidth(width*ratio);
         retval.setHeight(height*ratio);
-        retval.rotateProperty().set(Math.toDegrees(theta));
+        retval.setX(x*ratio);
+        retval.rotateProperty().set(-Math.toDegrees(theta));
+        retval.setFill(Color.TRANSPARENT);
+        retval.setStroke(Color.BLACK);
+        retval.setArcHeight(5);
+        retval.setArcWidth(5);
         return retval;
     }
 

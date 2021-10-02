@@ -29,6 +29,10 @@
                         <Label fx:id="jsonWritePathLabel" layoutX="268.0" layoutY="83.0" prefHeight="2.0" prefWidth="510.0" />
                         <Label fx:id="jsonFileNameLabel" layoutX="268.0" layoutY="109.0" prefHeight="2.0" prefWidth="510.0" />
                         <TextField fx:id="jsonFilenameTextField" layoutX="145.0" layoutY="140.0" />
+                        <Button layoutY="215.0" mnemonicParsing="false" onAction="#XMLRead" prefHeight="26.0" prefWidth="123.0" text="Read all XML files" />
+                        <Button layoutY="241.0" mnemonicParsing="false" onAction="#JSONRead" prefHeight="26.0" prefWidth="123.0" text="Read JSON file" />
+                        <Button layoutY="267.0" mnemonicParsing="false" onAction="#JSONWrite" prefHeight="26.0" prefWidth="123.0" text="Write JSON file" />
+                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#printData" prefHeight="26.0" prefWidth="166.0" text="Write JSON data to consol" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -40,21 +44,14 @@
                         <Button fx:id="NextButton" layoutX="896.0" layoutY="705.0" mnemonicParsing="false" onAction="#NextImage" prefHeight="26.0" prefWidth="96.0" text="Next" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="8.0" />
                         <Button fx:id="PrevButton" layoutX="896.0" layoutY="713.0" mnemonicParsing="false" onAction="#PrevImage" prefHeight="25.0" prefWidth="298.0" text="Prev" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="6.0" />
                         <Label fx:id="imageFileName" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="617.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                        <Button fx:id="JSONOpenerBtn" layoutX="678.0" layoutY="14.0" mnemonicParsing="false" onAction="#JSONOpen" prefHeight="25.0" prefWidth="92.0" text="Read JSON" />
                         <Button fx:id="ImageOpenerBtn" layoutX="788.0" layoutY="14.0" mnemonicParsing="false" onAction="#FolderOpener" prefHeight="25.0" prefWidth="92.0" text="Images" />
                         <Button fx:id="imageShowerBtn" disable="true" layoutX="896.0" layoutY="14.0" mnemonicParsing="false" onAction="#StartImage" prefHeight="25.0" prefWidth="93.0" text="Show images" />
                         <Pane fx:id="RectanglePane" layoutY="40.0" prefHeight="550.0" prefWidth="1067.0" style="-fx-border-color: black;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="142.0585375" rotate="175.10759053" stroke="BLACK" strokeType="INSIDE" width="97.7213875" x="96.88930625" y="355.9082312" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="142.0585375" rotate="-8.6" stroke="BLACK" strokeType="INSIDE" width="97.7213875" x="96.88930625" y="355.9082312" />
                            </children></Pane>
-                        <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#GenerateRectangles" prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
+                        <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
                         <Button fx:id="AnnotationClearBtn" layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveRectangles" prefHeight="25.0" prefWidth="124.0" text="Clear annotations" />
-                        <Label fx:id="w1" layoutX="29.0" layoutY="612.0" text="Label" />
-                        <Label fx:id="w2" layoutX="29.0" layoutY="640.0" text="Label" />
-                        <Label fx:id="h1" layoutX="29.0" layoutY="668.0" text="Label" />
-                        <Label fx:id="h2" layoutX="29.0" layoutY="697.0" text="Label" />
-                         <Label fx:id="w3" layoutX="29.0" layoutY="726.0" text="Label" />
-                         <Label fx:id="h3" layoutX="29.0" layoutY="752.0" text="Label" />
 
                      </children>
                   </AnchorPane>
