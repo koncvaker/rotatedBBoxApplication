@@ -19,7 +19,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/LabelApp2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/LabelApp2" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -32,6 +32,7 @@
       <workItem from="1633032417893" duration="34000" />
       <workItem from="1633032473903" duration="5000" />
       <workItem from="1633032494823" duration="16000" />
+      <workItem from="1633278234917" duration="39000" />
     </task>
     <servers />
   </component>

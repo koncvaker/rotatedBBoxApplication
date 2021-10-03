@@ -4,6 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labelapp2.AnnotController">
    <children>
@@ -13,26 +14,29 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="setXMLReadPathBtn" layoutY="1.0" mnemonicParsing="false" onAction="#getXMLReadPath" prefHeight="26.0" prefWidth="124.0" text="Set XML read path" />
-                        <Label layoutX="145.0" layoutY="5.0" prefHeight="18.0" prefWidth="94.0" text="XML read path:" />
-                        <Button fx:id="setPhotoReadPathBtn" layoutY="27.0" mnemonicParsing="false" onAction="#getPhotoReadPath" prefHeight="26.0" prefWidth="123.0" text="Set photo read path" />
-                        <Label layoutX="145.0" layoutY="31.0" prefHeight="18.0" prefWidth="94.0" text="Photo read path:" />
-                        <Button fx:id="setJSONReadPathBtn" layoutY="53.0" mnemonicParsing="false" onAction="#getJSONReadPath" prefHeight="26.0" prefWidth="123.0" text="Set JSON read path" />
-                        <Label layoutX="145.0" layoutY="57.0" prefHeight="18.0" prefWidth="97.0" text="JSON read path:" />
-                        <Button fx:id="setJSONWritePathBtn" layoutY="79.0" mnemonicParsing="false" onAction="#getJSONWritePath" prefHeight="26.0" prefWidth="123.0" text="Set JSON write path" />
-                        <Button fx:id="setJSONFileNameBtn" layoutY="105.0" mnemonicParsing="false" onAction="#getJSONFilenamePath" prefHeight="26.0" prefWidth="123.0" text="Set JSON file name" />
-                        <Label layoutX="143.0" layoutY="83.0" prefHeight="18.0" prefWidth="97.0" text="JSON write path:" />
-                        <Label layoutX="143.0" layoutY="109.0" prefHeight="18.0" prefWidth="97.0" text="JSON file name:" />
-                        <Label layoutX="268.0" layoutY="6.0" prefHeight="2.0" prefWidth="510.0" fx:id="xmlReadPathLabel" />
-                        <Label fx:id="photoReadPathLabel" layoutX="268.0" layoutY="31.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label fx:id="jsonReadPathLabel" layoutX="268.0" layoutY="57.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label fx:id="jsonWritePathLabel" layoutX="268.0" layoutY="83.0" prefHeight="2.0" prefWidth="510.0" />
-                        <Label fx:id="jsonFileNameLabel" layoutX="268.0" layoutY="109.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Button fx:id="setXMLReadPathBtn" layoutY="1.0" mnemonicParsing="false" onAction="#getXMLReadPath" prefHeight="26.0" prefWidth="160.0" text="Set XML read path" />
+                        <Label layoutX="231.0" layoutY="5.0" prefHeight="18.0" prefWidth="127.0" text="XML read path:" />
+                        <Button fx:id="setPhotoReadPathBtn" layoutY="27.0" mnemonicParsing="false" onAction="#getPhotoReadPath" prefHeight="26.0" prefWidth="160.0" text="Set photo read path" />
+                        <Label layoutX="231.0" layoutY="31.0" prefHeight="18.0" prefWidth="123.0" text="Photo read path:" />
+                        <Button fx:id="setJSONReadPathBtn" layoutY="53.0" mnemonicParsing="false" onAction="#getJSONReadPath" prefHeight="26.0" prefWidth="162.0" text="Set JSON read path" />
+                        <Label layoutX="231.0" layoutY="57.0" prefHeight="18.0" prefWidth="125.0" text="JSON read path:" />
+                        <Button fx:id="setJSONWritePathBtn" layoutY="79.0" mnemonicParsing="false" onAction="#getJSONWritePath" prefHeight="26.0" prefWidth="161.0" text="Set JSON write path" />
+                        <Button fx:id="setJSONFileNameBtn" layoutY="105.0" mnemonicParsing="false" onAction="#getJSONFilenamePath" prefHeight="26.0" prefWidth="159.0" text="Set JSON file name">
+                           <font>
+                              <Font name="Tibetan_Machine_Uni" size="13.0" />
+                           </font></Button>
+                        <Label layoutX="231.0" layoutY="83.0" prefHeight="18.0" prefWidth="119.0" text="JSON write path:" />
+                        <Label layoutX="229.0" layoutY="109.0" prefHeight="18.0" prefWidth="127.0" text="JSON file name:" />
+                        <Label layoutX="399.0" layoutY="7.0" prefHeight="2.0" prefWidth="510.0" fx:id="xmlReadPathLabel" />
+                        <Label fx:id="photoReadPathLabel" layoutX="399.0" layoutY="32.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonReadPathLabel" layoutX="399.0" layoutY="58.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonWritePathLabel" layoutX="399.0" layoutY="84.0" prefHeight="2.0" prefWidth="510.0" />
+                        <Label fx:id="jsonFileNameLabel" layoutX="399.0" layoutY="110.0" prefHeight="2.0" prefWidth="510.0" />
                         <TextField fx:id="jsonFilenameTextField" layoutX="145.0" layoutY="140.0" />
-                        <Button layoutY="215.0" mnemonicParsing="false" onAction="#XMLRead" prefHeight="26.0" prefWidth="123.0" text="Read all XML files" />
-                        <Button layoutY="241.0" mnemonicParsing="false" onAction="#JSONRead" prefHeight="26.0" prefWidth="123.0" text="Read JSON file" />
-                        <Button layoutY="267.0" mnemonicParsing="false" onAction="#JSONWrite" prefHeight="26.0" prefWidth="123.0" text="Write JSON file" />
-                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#printData" prefHeight="26.0" prefWidth="166.0" text="Write JSON data to consol" />
+                        <Button layoutY="215.0" mnemonicParsing="false" onAction="#XMLRead" prefHeight="26.0" prefWidth="152.0" text="Read all XML files" />
+                        <Button layoutY="241.0" mnemonicParsing="false" onAction="#JSONRead" prefHeight="26.0" prefWidth="152.0" text="Read JSON file" />
+                        <Button layoutY="267.0" mnemonicParsing="false" onAction="#JSONWrite" prefHeight="26.0" prefWidth="155.0" text="Write JSON file" />
+                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#printData" prefHeight="26.0" prefWidth="202.0" text="Write JSON data to consol" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -52,7 +56,7 @@
                            </children></Pane>
                         <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
                         <Button fx:id="AnnotationClearBtn" layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveRectangles" prefHeight="25.0" prefWidth="124.0" text="Clear annotations" />
-                        <CheckBox fx:id="segmentationCheckbox" layoutX="288.0" layoutY="18.0" mnemonicParsing="false" text="Segmentation" />
+                        <CheckBox fx:id="segmentationCheckbox" layoutX="277.0" layoutY="18.0" mnemonicParsing="false" text="Segmentation" />
 
                      </children>
                   </AnchorPane>

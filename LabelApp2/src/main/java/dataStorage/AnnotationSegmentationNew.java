@@ -65,16 +65,10 @@ public class AnnotationSegmentationNew {
         Vector<Double> doubleVector = new Vector<Double>();
         doubleVector.add(x1);
         doubleVector.add(y1);
-        segmentation.add(doubleVector);
-        doubleVector = new Vector<Double>();
         doubleVector.add(x2);
         doubleVector.add(y2);
-        segmentation.add(doubleVector);
-        doubleVector = new Vector<Double>();
         doubleVector.add(x3);
         doubleVector.add(y3);
-        segmentation.add(doubleVector);
-        doubleVector = new Vector<Double>();
         doubleVector.add(x4);
         doubleVector.add(y4);
         segmentation.add(doubleVector);
@@ -82,11 +76,10 @@ public class AnnotationSegmentationNew {
 
 
     public void print(){
-        int vectorCounter = 1;
-        for(Vector<Double> i : segmentation){
-            System.out.println("y" + vectorCounter + ": " + i.get(0));
-            System.out.println("x" + vectorCounter + ": " + i.get(1));
-            vectorCounter++;
+        for(int i = 0 ; i < 8 ; i+=2){
+            System.out.println("y" + i + ": " + segmentation.get(0).get(i));
+            int tempi = i+1;
+            System.out.println("x" + tempi + ": " + segmentation.get(0).get(i+1));
         }
     }
 
@@ -97,10 +90,14 @@ public class AnnotationSegmentationNew {
 
     public Vector<Double> toDoubleVector(Double imgRatio) {
         Vector<Double> doubleVector = new Vector<Double>();
-        for(Vector<Double> i : segmentation){
-            doubleVector.add(i.get(0)*imgRatio);
-            doubleVector.add(i.get(1)*imgRatio);
-        }
+        doubleVector.add(segmentation.get(0).get(0)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(1)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(2)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(3)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(4)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(5)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(6)*imgRatio);
+        doubleVector.add(segmentation.get(0).get(7)*imgRatio);
         return doubleVector;
     }
 }

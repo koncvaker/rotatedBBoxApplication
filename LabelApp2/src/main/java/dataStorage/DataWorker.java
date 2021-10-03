@@ -130,7 +130,7 @@ public class DataWorker {
     }
     void readXML(String fname) {
         try {
-            File inputFile = new File(XMLReadPath + '\\' + fname);
+            File inputFile = new File(XMLReadPath + File.separator + fname);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -252,7 +252,7 @@ public class DataWorker {
         FileWriter file;
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter(JSONWritePath + '\\' + JSONFileName);
+            file = new FileWriter(JSONWritePath + File.separator + JSONFileName);
             file.write(obj.toJSONString());
             file.flush();
             file.close();

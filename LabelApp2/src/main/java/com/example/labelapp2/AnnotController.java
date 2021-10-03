@@ -175,7 +175,7 @@ public class AnnotController {
         if (readImages.length > 0) {
             FileInputStream input = null;
             try {
-                input = new FileInputStream(readImgFolderPath + '\\' + readImages[imgId]);
+                input = new FileInputStream(readImgFolderPath + File.separator + readImages[imgId]);
                 Image image = new Image(input);
                 imageView.setImage(image);
                 imageFileName.setText(readImages[imgId]);
