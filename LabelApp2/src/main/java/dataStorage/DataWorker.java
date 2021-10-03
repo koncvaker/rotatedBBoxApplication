@@ -45,7 +45,6 @@ public class DataWorker {
         }
     }
     public void addAnnotation(int img_id, int cat_id, double area, int iscrowd, AnnotationBBox box, AnnotationSegmentationNew seg){
-        // TODO: 2021. 09. 28. Repair segmentation
         storage.addAnnotation(new AnnotationCore(idGenerator.getAnn_id(),img_id,cat_id,area,iscrowd,box,seg));
 
     }
@@ -171,12 +170,10 @@ public class DataWorker {
                     bboxWidth = Double.parseDouble(eElement.getElementsByTagName("w").item(0).getTextContent());
                     bboxHeight = Double.parseDouble(eElement.getElementsByTagName("h").item(0).getTextContent());
 
-                    //Convert center to bottom left for training
-                    bboxX = bboxX - bboxWidth / 2;
-                    bboxY = bboxY - bboxHeight / 2;
+
                     bboxAngle = Double.parseDouble(eElement.getElementsByTagName("angle").item(0).getTextContent());
                     //Normalize angle between -pi/4 and pi/4 (-45° | +45°)
-                    // TODO: 2021. 09. 30. When displayed it rotation has to be inverted, because we need to measure anti clockwise for training, and clockwise for displaying
+
                     double tempBBoxAngle = Math.toDegrees(bboxAngle);
                     while (tempBBoxAngle < -45){
                         tempBBoxAngle += 90;
@@ -192,6 +189,9 @@ public class DataWorker {
                         bboxWidth = bboxHeight;
                         bboxHeight = tempWidth;
                     }
+                    //Convert center to TOP left for training
+                    bboxX = bboxX - bboxWidth / 2;
+                    bboxY = bboxY - bboxHeight / 2;
                     //We have to measure anti-clockwise for training!
                     bboxAngle = -1 * Math.toRadians(tempBBoxAngle);
 

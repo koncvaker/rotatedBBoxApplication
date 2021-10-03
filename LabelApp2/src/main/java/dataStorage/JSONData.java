@@ -1,5 +1,8 @@
 package dataStorage;
 
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -7,6 +10,7 @@ import org.json.simple.JSONObject;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class JSONData {
@@ -154,6 +158,27 @@ public class JSONData {
             rectangleVector.add(i.box.toRectangle(imgRatio));
         }
         return rectangleVector;
+    }
+
+    public Vector<Polygon> getBBoxSegmentations(String filename, Double imgRatio){
+        Vector<Polygon> polygonVector = new Vector<Polygon>();
+
+        Vector<AnnotationCore> BBoxVector = getAnnotationsByImageID(getImageIDByFilename(filename));
+        for(AnnotationCore i : BBoxVector){
+            Vector<Double> segVector = new Vector<Double>();
+            segVector = i.segment.toDoubleVector(imgRatio);
+            Object[] objArray = segVector.toArray();
+            Double[] doubleArray = Arrays.copyOf(objArray,
+                    objArray.length,
+                    Double[].class);
+            Polygon polygon = new Polygon();
+            polygon.setFill(Color.TRANSPARENT);
+            polygon.setStroke(Color.RED);
+            polygon.getPoints().addAll(doubleArray);
+            polygon.setStrokeWidth(1);
+            polygonVector.add(polygon);
+        }
+        return polygonVector;
     }
 
     //Print stuff

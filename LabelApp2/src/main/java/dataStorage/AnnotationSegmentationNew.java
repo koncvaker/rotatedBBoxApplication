@@ -1,7 +1,9 @@
 package dataStorage;
 
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 
+import java.awt.*;
 import java.util.Vector;
 
 public class AnnotationSegmentationNew {
@@ -13,28 +15,52 @@ public class AnnotationSegmentationNew {
     public AnnotationSegmentationNew(double x, double y, double w, double h, double theta){
 
         segmentation = new Vector<Vector<Double>>();
-        double degree = Math.toDegrees(theta);
-        double x1 = x;
-        double y1 = y;
 
-        double tempX;
-        double tempY;
+        double x1;
+        double y1;
+        double x2;
+        double y2;
+        double x3;
+        double y3;
+        double x4;
+        double y4;
 
+        double px;
+        double py;
+
+        //Center
+        double ox = x + w/2;
+        double oy = y + h/2;
+
+        double angle;
+        if(theta < 0){
+            angle = Math.toRadians(360 + Math.toDegrees(theta));
+        }
+        else {
+            angle = theta;
+        }
+        angle *= -1;
         //Top left
-        tempX = x;
-        tempY = y + h;
-        double x2 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
-        double y2 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
+        x1 = Math.cos(angle) * (x - ox) - Math.sin(angle) * (y - oy) + ox;
+        y1 = Math.sin(angle) * (x - ox) + Math.cos(angle) * (y - oy) + oy;
+
         //Top right
-        tempX = x + w;
-        tempY = y + h;
-        double x3 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
-        double y3 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
+        px = x + w;
+        py = y;
+        x2 = Math.cos(angle) * (px - ox) - Math.sin(angle) * (py - oy) + ox;
+        y2 = Math.sin(angle) * (px - ox) + Math.cos(angle) * (py - oy) + oy;
+
         //Bottom right
-        tempX = x + w;
-        tempY = y;
-        double x4 = Math.cos(theta) * (tempX-x1) - Math.sin(theta) * (tempY-y1) + x1;
-        double y4 = Math.sin(theta) * (tempX-x1) + Math.cos(theta) * (tempY-y1) + y1;
+        px = x + w;
+        py = y + h;
+        x3 = Math.cos(angle) * (px - ox) - Math.sin(angle) * (py - oy) + ox;
+        y3 = Math.sin(angle) * (px - ox) + Math.cos(angle) * (py - oy) + oy;
+
+        //Bottom left
+        px = x;
+        py = y + h;
+        x4 = Math.cos(angle) * (px - ox) - Math.sin(angle) * (py - oy) + ox;
+        y4 = Math.sin(angle) * (px - ox) + Math.cos(angle) * (py - oy) + oy;
 
         Vector<Double> doubleVector = new Vector<Double>();
         doubleVector.add(x1);
@@ -68,14 +94,13 @@ public class AnnotationSegmentationNew {
         return segmentation;
     }
 
-    public Vector<Polygon> toPolygonVector(){
-        Vector<Polygon> retval = new Vector<Polygon>();
-        for (Vector<Double> i : segmentation ) {
-            Polygon polygon = new Polygon();
-            polygon.getPoints().addAll((Double[])i.toArray());
-            retval.add(polygon);
-        }
-        return retval;
-    }
 
+    public Vector<Double> toDoubleVector(Double imgRatio) {
+        Vector<Double> doubleVector = new Vector<Double>();
+        for(Vector<Double> i : segmentation){
+            doubleVector.add(i.get(0)*imgRatio);
+            doubleVector.add(i.get(1)*imgRatio);
+        }
+        return doubleVector;
+    }
 }

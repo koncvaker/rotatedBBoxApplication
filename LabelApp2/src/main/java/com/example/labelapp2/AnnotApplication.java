@@ -7,11 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-// TODO: 2021. 09. 30. Read xml, generate json rework, 
-// TODO: 2021. 09. 26. Generate rectangles from bounding boxes 
+
+
 // TODO: 2021. 09. 26. Generate polynoms from segmentations
-// TODO: 2021. 09. 26. Create radio button to switch between them
-// TODO: 2021. 09. 30. The xml files stores the (xCenter,yCenter) coordinates, for display we need (xMin,yMax) and for train we need (xMin,yMin) 
+
 public class AnnotApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

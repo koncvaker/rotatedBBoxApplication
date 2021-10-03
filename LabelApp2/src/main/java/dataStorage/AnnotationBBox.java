@@ -31,7 +31,7 @@ public class AnnotationBBox {
 
     public Rectangle toRectangle(double ratio){
         Rectangle retval = new Rectangle();
-        retval.setY((y+height)*ratio);
+        retval.setY(y*ratio);
         retval.setWidth(width*ratio);
         retval.setHeight(height*ratio);
         retval.setX(x*ratio);

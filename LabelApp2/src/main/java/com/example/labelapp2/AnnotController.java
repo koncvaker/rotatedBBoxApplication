@@ -2,7 +2,9 @@ package com.example.labelapp2;
 
 import dataStorage.DataWorker;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -10,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -53,6 +56,8 @@ public class AnnotController {
     private Button AnnotationClearBtn;
     @FXML
     private Pane RectanglePane;
+    @FXML
+    private CheckBox segmentationCheckbox;
 
 
 
@@ -201,11 +206,20 @@ public class AnnotController {
     //Annotations stuff
 
     private void GenerateRectangles(String filename,double ratio){
-        Vector<Rectangle> rectangleVector = dataStorage.storage.getBBoxRectangles(filename,ratio);
-
-        for (Rectangle i : rectangleVector){
-            RectanglePane.getChildren().add(i);
+        if(!segmentationCheckbox.isSelected()){
+            Vector<Rectangle> rectangleVector = dataStorage.storage.getBBoxRectangles(filename,ratio);
+            for (Rectangle i : rectangleVector){
+                RectanglePane.getChildren().add(i);
+            }
         }
+        else {
+            Vector<Polygon> polygonVector = dataStorage.storage.getBBoxSegmentations(filename,ratio);
+            for(Polygon i : polygonVector){
+                RectanglePane.getChildren().add(i);
+            }
+        }
+
+
 
     }
     @FXML
