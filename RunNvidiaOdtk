@@ -1,0 +1,17 @@
+sudo docker run --name nvidiaOdtk -v $HOME/Desktop/Szakdolgozat:/workspace/Szakdolgozat -t --gpus all --rm --ipc=host -it odtk:latest
+
+odtk train /workspace/Szakdolgozat/retinanet_rn50fpn.pth --backbone ResNet50FPN     --images /workspace/Szakdolgozat/Training/TrainImg --annotations /workspace/Szakdolgozat/Training/train.json     --val-images /workspace/Szakdolgozat/Training/ValIMG --val-annotations /workspace/Szakdolgozat/Training/val.json  --lr 0.00001 --augment-rotate --resize 600 --max-size 800 --classes 1 --batch 1 --regularization-l2 0.0001  --iters 90000 --val-iters 2000 --rotated-bbox --full-precision --override
+
+odtk infer /workspace/Szakdolgozat/retinanet_rn50fpn.pth --images=/workspace/Szakdolgozat/Training/TrainIMG --output=/workspace/Szakdolgozat/detections.json --full-precision --resize 600 --max-size 800
+
+odtk infer /workspace/Szakdolgozat/retinanet_rn50fpn.pth --images=/workspace/Szakdolgozat/Training/ValIMG --annotations=/workspace/Szakdolgozat/Training/val.json
+
+
+odtk train /workspace/Szakdolgozat/retinanet_rn50fpn.pth --backbone ResNet50FPN     --images /workspace/Szakdolgozat/Training/TrainImg --annotations /workspace/Szakdolgozat/Training/train.json     --val-images /workspace/Szakdolgozat/Training/ValIMG --val-annotations /workspace/Szakdolgozat/Training/val.json  --lr 0.00001 --augment-rotate --resize 600 --max-size 800 --classes 1 --batch 1 --regularization-l2 0.0001  --iters 90000 --val-iters 2000 --rotated-bbox --full-precision --override
+
+odtk train /workspace/Szakdolgozat/retinanet_rn50fpn.pth --backbone ResNet50FPN     --images /workspace/Szakdolgozat/Training/TrainImg --annotations /workspace/Szakdolgozat/Training/train.json     --val-images /workspace/Szakdolgozat/Training/ValIMG --val-annotations /workspace/Szakdolgozat/Training/val.json  --lr 0.00001 --augment-rotate --resize 600 --max-size 800 --classes 1 --batch 1 --regularization-l2 0.0001  --iters 10000 --val-iters 2000 --rotated-bbox --full-precision --augment-brightness --augment-contrast --augment-hue  --augment-saturation --logdir --override
+
+
+--logdir mappa
+tensorboard logolás
+
