@@ -48,10 +48,11 @@
                         <Button fx:id="imageShowerBtn" disable="true" layoutX="896.0" layoutY="14.0" mnemonicParsing="false" onAction="#StartImage" prefHeight="25.0" prefWidth="93.0" text="Show images" />
                         <Pane fx:id="RectanglePane" layoutY="40.0" prefHeight="550.0" prefWidth="1067.0" style="-fx-border-color: black;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="142.0585375" rotate="-8.6" stroke="BLACK" strokeType="INSIDE" width="97.7213875" x="96.88930625" y="355.9082312" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="100.0" rotate="-8.6" stroke="BLACK" strokeType="INSIDE" width="100.0" x="96.88930625" y="355.9082312" />
                            </children></Pane>
-                        <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
+                        <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
                         <Button fx:id="AnnotationClearBtn" layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveRectangles" prefHeight="25.0" prefWidth="124.0" text="Clear annotations" />
+                        <CheckBox fx:id="segmentationCheckbox" layoutX="288.0" layoutY="18.0" mnemonicParsing="false" text="Segmentation" />
 
                      </children>
                   </AnchorPane>
