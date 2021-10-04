@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 
-// TODO: 2021. 09. 26. Generate polynoms from segmentations
+
 
 public class AnnotApplication extends Application {
     @Override

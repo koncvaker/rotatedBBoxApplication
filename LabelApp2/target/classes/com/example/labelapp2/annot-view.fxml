@@ -37,6 +37,7 @@
                         <Button layoutY="241.0" mnemonicParsing="false" onAction="#JSONRead" prefHeight="26.0" prefWidth="152.0" text="Read JSON file" />
                         <Button layoutY="267.0" mnemonicParsing="false" onAction="#JSONWrite" prefHeight="26.0" prefWidth="155.0" text="Write JSON file" />
                         <Button layoutY="293.0" mnemonicParsing="false" onAction="#printData" prefHeight="26.0" prefWidth="202.0" text="Write JSON data to consol" />
+                        <CheckBox fx:id="detectionCheckbox" layoutX="158.0" layoutY="219.0" mnemonicParsing="false" text="Detection" />
                      </children></AnchorPane>
             </content>
           </Tab>
