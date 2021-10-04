@@ -8,6 +8,7 @@ public class AnnotationCore {
     int isCrowd = 0;
     AnnotationBBox box;
     AnnotationSegmentationNew segment;
+    double score;
 
     public AnnotationCore(int annotID, int imgID, int catID, double area, int isCrowd, AnnotationBBox box, AnnotationSegmentationNew seg){
         this.annotID    = annotID;
@@ -18,6 +19,18 @@ public class AnnotationCore {
         this.box        = box;
         this.segment    = seg;
     }
+
+    public AnnotationCore(int imgID, int catID,  AnnotationBBox box, AnnotationSegmentationNew seg,double score){
+        //this.annotID    = annotID;
+        this.imgID      = imgID;
+        this.catID      = catID;
+        //   this.area       = area;
+        //   this.isCrowd    = isCrowd;
+        this.box        = box;
+        this.segment    = seg;
+        this.score      = score;
+    }
+
 
     public void print(){
         System.out.println("AnnotID: " + annotID);

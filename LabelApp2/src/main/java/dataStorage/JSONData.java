@@ -151,11 +151,14 @@ public class JSONData {
         return retval;
     }
 
-    public Vector<Rectangle> getBBoxRectangles(String filename, Double imgRatio){
+    public Vector<Rectangle> getBBoxRectangles(String filename, Double imgRatio,double minScore){
         Vector<Rectangle> rectangleVector = new Vector<Rectangle>();
         Vector<AnnotationCore> BBoxVector = getAnnotationsByImageID(getImageIDByFilename(filename));
         for(AnnotationCore i : BBoxVector){
-            rectangleVector.add(i.box.toRectangle(imgRatio));
+            if(i.score >= minScore){
+                rectangleVector.add(i.box.toRectangle(imgRatio));
+            }
+
         }
         return rectangleVector;
     }

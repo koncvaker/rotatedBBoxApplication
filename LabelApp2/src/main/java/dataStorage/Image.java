@@ -12,6 +12,10 @@ public class Image {
         this.width      = width;
         this.height     = height;
     }
+    public Image(int id,String fileName){
+        this.id         = id;
+        this.fileName   = fileName;
+    }
 
     public boolean nameEquals(String _file_name){
         return this.fileName.equals(_file_name);

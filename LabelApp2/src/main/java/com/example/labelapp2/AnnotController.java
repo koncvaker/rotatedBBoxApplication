@@ -37,6 +37,7 @@ public class AnnotController {
     public Label jsonFileNameLabel;
     public Label xmlReadPathLabel;
     public TextField jsonFilenameTextField;
+    public CheckBox detectionCheckbox;
 
     @FXML
     private Label imageFileName;
@@ -122,7 +123,7 @@ public class AnnotController {
 
     @FXML
     protected void JSONRead() {
-        dataStorage.readJSON();
+        dataStorage.readJSON(!detectionCheckbox.isSelected());
     }
     @FXML
     protected void XMLRead(){
@@ -181,7 +182,8 @@ public class AnnotController {
                 imageFileName.setText(readImages[imgId]);
                 double ratio1 = imageView.getBoundsInParent().getWidth()/imageView.getImage().getWidth();
                 double ratio2 = imageView.getBoundsInParent().getHeight()/imageView.getImage().getHeight();
-                GenerateRectangles(readImages[imgId],Math.min(ratio1,ratio2));
+                // TODO: 2021. 10. 04. Read min score for rectangle showing
+                GenerateRectangles(readImages[imgId],Math.min(ratio1,ratio2),0.8);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -205,9 +207,9 @@ public class AnnotController {
 
     //Annotations stuff
 
-    private void GenerateRectangles(String filename,double ratio){
+    private void GenerateRectangles(String filename,double ratio,double minScore){
         if(!segmentationCheckbox.isSelected()){
-            Vector<Rectangle> rectangleVector = dataStorage.storage.getBBoxRectangles(filename,ratio);
+            Vector<Rectangle> rectangleVector = dataStorage.storage.getBBoxRectangles(filename,ratio,minScore);
             for (Rectangle i : rectangleVector){
                 RectanglePane.getChildren().add(i);
             }

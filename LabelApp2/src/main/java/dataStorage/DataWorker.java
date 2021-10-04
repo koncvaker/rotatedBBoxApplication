@@ -78,7 +78,7 @@ public class DataWorker {
 
 
     //Read stuff from files
-    public void readJSON(){
+    public void readJSON(boolean detection){
         String path = JSONReadPath;
         resetStorage();
         resetIdentityGenerator();
@@ -93,14 +93,17 @@ public class DataWorker {
             JSONArray categoriesJSONRead = (JSONArray) root.get("categories");
 
             for(Object i : imageJSONRead){
-                parseImage((JSONObject)i);
+                parseImage((JSONObject)i,detection);
             }
             for(Object i : annotationsJSONRead){
-                parseAnnotation((JSONObject)i);
+                parseAnnotation((JSONObject)i,detection);
             }
-            for(Object i : categoriesJSONRead){
-                parseCategory((JSONObject)i);
+            if(!detection){
+                for(Object i : categoriesJSONRead){
+                    parseCategory((JSONObject)i);
+                }
             }
+
 
             storage.printAll();
 
@@ -206,14 +209,21 @@ public class DataWorker {
     }
 
     //Parse stuff
-    public void parseImage(JSONObject image){
+    public void parseImage(JSONObject image,boolean detection){
         String   filename    = (String) image.get("file_name");
-        Long     width      = (Long) image.get("width");
-        Long     height     =  (Long) image.get("height");
+
         Long     id         =  (Long) image.get("id");
-        storage.addImage(new Image(id.intValue(),filename,width.intValue(),height.intValue()));
+        if(detection){
+            storage.addImage(new Image(id.intValue(),filename));
+        }
+        else{
+            Long     width      = (Long) image.get("width");
+            Long     height     =  (Long) image.get("height");
+            storage.addImage(new Image(id.intValue(),filename,width.intValue(),height.intValue()));
+        }
+
     }
-    public void parseAnnotation(JSONObject annotation){
+    public void parseAnnotation(JSONObject annotation,boolean detection){
         Double      area          = (Double)      annotation.get("area");
         Long        category_id   = (Long)        annotation.get("category_id");
         JSONArray   bbox          = (JSONArray)   annotation.get("bbox");
@@ -221,7 +231,7 @@ public class DataWorker {
         JSONArray   segmentation  = (JSONArray)   annotation.get("segmentation");
         Long        id            = (Long)        annotation.get("id");
         Long        image_id      = (Long)        annotation.get("image_id");
-
+        Double      score         = (Double)      annotation.get("score");
         Vector<Double> bboxVector = new Vector<Double>();
         for(Object i : bbox){
             bboxVector.add((Double) i);
@@ -237,7 +247,12 @@ public class DataWorker {
             segmentationVector.add(innerSegmentationVector);
         }
 
-        storage.addAnnotation(new AnnotationCore(id.intValue(),image_id.intValue(),category_id.intValue(),area,iscrowd.intValue(),new AnnotationBBox(bboxVector),new AnnotationSegmentationNew(segmentationVector)));
+        if(detection){
+            storage.addAnnotation(new AnnotationCore(image_id.intValue(),category_id.intValue(),new AnnotationBBox(bboxVector),new AnnotationSegmentationNew(segmentationVector),score));
+        }
+        else {
+            storage.addAnnotation(new AnnotationCore(id.intValue(),image_id.intValue(),category_id.intValue(),area,iscrowd.intValue(),new AnnotationBBox(bboxVector),new AnnotationSegmentationNew(segmentationVector)));
+        }
 
     }
     public void parseCategory(JSONObject category){
