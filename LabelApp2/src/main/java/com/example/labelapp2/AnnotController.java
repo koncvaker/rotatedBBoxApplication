@@ -211,6 +211,7 @@ public class AnnotController {
         if(!segmentationCheckbox.isSelected()){
             Vector<Rectangle> rectangleVector = dataStorage.storage.getBBoxRectangles(filename,ratio,minScore);
             for (Rectangle i : rectangleVector){
+                i.setStroke(Color.YELLOW);
                 RectanglePane.getChildren().add(i);
             }
         }

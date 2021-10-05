@@ -18,6 +18,7 @@ public class AnnotationCore {
         this.isCrowd    = isCrowd;
         this.box        = box;
         this.segment    = seg;
+        this.score      = 0;
     }
 
     public AnnotationCore(int imgID, int catID,  AnnotationBBox box, AnnotationSegmentationNew seg,double score){

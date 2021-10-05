@@ -156,6 +156,7 @@ public class JSONData {
         Vector<AnnotationCore> BBoxVector = getAnnotationsByImageID(getImageIDByFilename(filename));
         for(AnnotationCore i : BBoxVector){
             if(i.score >= minScore){
+
                 rectangleVector.add(i.box.toRectangle(imgRatio));
             }
 
