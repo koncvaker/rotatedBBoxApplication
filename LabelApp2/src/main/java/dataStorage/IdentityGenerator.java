@@ -1,9 +1,9 @@
 package dataStorage;
 
 public class IdentityGenerator {
-    private int img_id = 0;
-    private int ann_id = 0;
-    private int cat_id = 0;
+    private int img_id = 1;
+    private int ann_id = 1;
+    private int cat_id = 1;
 
     public int getImg_id(){
         int temp_id = img_id;
