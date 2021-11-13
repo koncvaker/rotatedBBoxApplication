@@ -12,7 +12,7 @@
         <tabs>
           <Tab text="Data loading">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane maxHeight="800.0" maxWidth="1000.0" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0">
                      <children>
                         <Button fx:id="setXMLReadPathBtn" layoutY="1.0" mnemonicParsing="false" onAction="#getXMLReadPath" prefHeight="26.0" prefWidth="160.0" text="Set XML read path" />
                         <Label layoutX="231.0" layoutY="5.0" prefHeight="18.0" prefWidth="127.0" text="XML read path:" />
@@ -57,7 +57,12 @@
                            </children></Pane>
                         <Button fx:id="AnnotationShowBtn" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Show annotations" />
                         <Button fx:id="AnnotationClearBtn" layoutX="393.0" layoutY="14.0" mnemonicParsing="false" onAction="#RemoveRectangles" prefHeight="25.0" prefWidth="124.0" text="Clear annotations" />
-                        <CheckBox fx:id="segmentationCheckbox" layoutX="277.0" layoutY="18.0" mnemonicParsing="false" text="Segmentation" />
+                        <CheckBox fx:id="segmentationCheckbox" layoutX="751.0" layoutY="905.0" mnemonicParsing="false" text="Segmentation" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="352.20000000000005" />
+                        <Slider layoutY="20.0" max="1.0" AnchorPane.leftAnchor="0.0" />
+                        <CheckBox fx:id="annotationCheckbox" layoutX="737.0" layoutY="905.0" mnemonicParsing="false" text="Annotation" AnchorPane.bottomAnchor="66.00000000000003" AnchorPane.rightAnchor="366.2" />
+                        <CheckBox fx:id="groundProofSegChkbox" layoutX="554.0" layoutY="886.0" mnemonicParsing="false" text="Ground proof segmentation" AnchorPane.bottomAnchor="47.00000000000002" AnchorPane.rightAnchor="474.79999999999995" />
+                        <CheckBox fx:id="groundProofAnnChkbox" layoutX="554.0" layoutY="886.0" mnemonicParsing="false" text="Ground proof annotation" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="490.0" />
+                        <Label layoutX="147.0" layoutY="18.0" AnchorPane.leftAnchor="147.0" AnchorPane.topAnchor="18.0" />
 
                      </children>
                   </AnchorPane>

@@ -183,7 +183,7 @@ public class AnnotController {
                 double ratio1 = imageView.getBoundsInParent().getWidth()/imageView.getImage().getWidth();
                 double ratio2 = imageView.getBoundsInParent().getHeight()/imageView.getImage().getHeight();
                 // TODO: 2021. 10. 04. Read min score for rectangle showing
-                GenerateRectangles(readImages[imgId],Math.min(ratio1,ratio2),0.8);
+                GenerateRectangles(readImages[imgId],Math.min(ratio1,ratio2),0.01);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -229,7 +229,6 @@ public class AnnotController {
     protected void RemoveRectangles(){
         RectanglePane.getChildren().removeAll();
         RectanglePane.getChildren().clear();
-
     }
 
 
